@@ -13,9 +13,7 @@ import UserUpdateModal from "../partials/UserUpdateModal";
 import { toast, ToastContainer } from "react-toastify";
 import icons from "../../../src/icons/Mike-Myers.jpg";
 import loading from "../../../src/icons/loading.gif";
-
 class ManageCompanies extends Component {
-
     constructor(props) {
         super(props);
         this.columns = [
@@ -583,7 +581,6 @@ class ManageCompanies extends Component {
         </div>
         );
     }
-
 }
 
 ManageCompanies.propTypes = {

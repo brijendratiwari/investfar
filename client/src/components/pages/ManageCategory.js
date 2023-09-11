@@ -17,10 +17,8 @@ import loading from "../../../src/icons/loading.gif";
 
 
 class ManageCategory extends Component {
-
     constructor(props) {
         super(props);
-
         this.columns = [
             {
                 key: "sno",
@@ -78,7 +76,6 @@ class ManageCategory extends Component {
                                 <button class="shortbtn grey-btn">Edit</button>
                                 <button class="shortbtn grey-btn">Delete</button>
                                 <button class="shortbtn grey-btn">Activate</button>
-
                             </div>
                         </Fragment>
                     );

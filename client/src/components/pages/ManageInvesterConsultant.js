@@ -14,9 +14,7 @@ import { toast, ToastContainer } from "react-toastify";
 import icons from "../../../src/icons/Mike-Myers.jpg";
 import loading from "../../../src/icons/loading.gif";
 import { format } from 'date-fns';
-
 class ManageInvesterConsultant extends Component {
-
     constructor(props) {
         super(props);
         this.columns = [
