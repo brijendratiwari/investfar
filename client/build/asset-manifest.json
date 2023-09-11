@@ -1,18 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.883c595e.chunk.css",
-    "main.js": "/static/js/main.f6f8af10.chunk.js",
-    "main.js.map": "/static/js/main.f6f8af10.chunk.js.map",
-    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
-    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
-    "static/css/2.8db1f4ae.chunk.css": "/static/css/2.8db1f4ae.chunk.css",
-    "static/js/2.65f2fd30.chunk.js": "/static/js/2.65f2fd30.chunk.js",
-    "static/js/2.65f2fd30.chunk.js.map": "/static/js/2.65f2fd30.chunk.js.map",
+    "main.css": "/static/css/main.902b30eb.chunk.css",
+    "main.js": "/static/js/main.49f85950.chunk.js",
+    "main.js.map": "/static/js/main.49f85950.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.81534a39.js",
+    "runtime-main.js.map": "/static/js/runtime-main.81534a39.js.map",
+    "static/css/2.a8b207a0.chunk.css": "/static/css/2.a8b207a0.chunk.css",
+    "static/js/2.ff7fa781.chunk.js": "/static/js/2.ff7fa781.chunk.js",
+    "static/js/2.ff7fa781.chunk.js.map": "/static/js/2.ff7fa781.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.576f5dd6941768e4715a700d5f79d28e.js": "/precache-manifest.576f5dd6941768e4715a700d5f79d28e.js",
+    "precache-manifest.607d7ad56e5df96275b3be27b07d4385.js": "/precache-manifest.607d7ad56e5df96275b3be27b07d4385.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/2.8db1f4ae.chunk.css.map": "/static/css/2.8db1f4ae.chunk.css.map",
-    "static/css/main.883c595e.chunk.css.map": "/static/css/main.883c595e.chunk.css.map",
+    "static/css/2.a8b207a0.chunk.css.map": "/static/css/2.a8b207a0.chunk.css.map",
+    "static/css/main.902b30eb.chunk.css.map": "/static/css/main.902b30eb.chunk.css.map",
+    "static/js/2.ff7fa781.chunk.js.LICENSE.txt": "/static/js/2.ff7fa781.chunk.js.LICENSE.txt",
+    "static/js/main.49f85950.chunk.js.LICENSE.txt": "/static/js/main.49f85950.chunk.js.LICENSE.txt",
     "static/media/Mike-Myers.jpg": "/static/media/Mike-Myers.8b8cb19e.jpg",
     "static/media/ac.png": "/static/media/ac.a6537905.png",
     "static/media/calculator.png": "/static/media/calculator.ff74d50c.png",
@@ -22,5 +24,12 @@
     "static/media/image9.png": "/static/media/image9.8d17c9af.png",
     "static/media/loginlogo.jpg": "/static/media/loginlogo.a60462f8.jpg",
     "static/media/walkscoure.png": "/static/media/walkscoure.6d19b74e.png"
-  }
+  },
+  "entrypoints": [
+    "static/js/runtime-main.81534a39.js",
+    "static/css/2.a8b207a0.chunk.css",
+    "static/js/2.ff7fa781.chunk.js",
+    "static/css/main.902b30eb.chunk.css",
+    "static/js/main.49f85950.chunk.js"
+  ]
 }
