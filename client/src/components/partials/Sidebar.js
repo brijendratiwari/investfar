@@ -72,6 +72,12 @@ class Sidebar extends Component {
                                                 src={icons4} /><span>Manage Investor Consultant</span></div>
                                         </NavLink>
                                     </li>
+                                    <li>
+                                        <NavLink to="/manageBlog" activeClassName="active">
+                                            <div class="linkblock d-flex align-items-center"><img
+                                                src={icons2} /><span>Manage Blog</span></div>
+                                        </NavLink>
+                                    </li>
                                 </ul>
                             </div>
                         </nav>
