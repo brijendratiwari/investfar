@@ -77,7 +77,7 @@ class Sidebar extends Component {
                                             <div class="linkblock d-flex align-items-center"><img
                                                 src={icons2} /><span>Manage Blog</span></div>
                                         </NavLink>
-                                    </li>
+                                    </li> 
                                 </ul>
                             </div>
                         </nav>
