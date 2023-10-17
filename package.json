@@ -9,6 +9,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "concurrently": "^4.1.0",
+    "draft-js": "^0.11.7",
     "express": "^4.17.1",
     "firebase": "^8.6.8",
     "is-empty": "^1.2.0",
@@ -16,6 +17,7 @@
     "mongoose": "^5.7.5",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
+    "react-draft-wysiwyg": "^1.15.0",
     "redux-firestore": "^2.0.1",
     "validator": "^11.0.0"
   },

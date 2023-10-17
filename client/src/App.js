@@ -26,7 +26,7 @@ import ManageProperties from "./components/pages/ManageProperties";
 import ManageCategory from "./components/pages/ManageCategory";
 import ManageInvesterConsultant from "./components/pages/ManageInvesterConsultant";
 import ManagePropertiesRequests from "./components/pages/ManagePropertiesRequests";
-
+import ManageBlog from "./components/pages/ManageBlog";
 
 if (localStorage.jwtToken) {
     const token = localStorage.jwtToken;
@@ -60,6 +60,7 @@ class App extends Component {
                                 <PrivateRoute exact path="/manageCategory" component={ManageCategory} />
                                 <PrivateRoute exact path="/manageInvesterConsultant" component={ManageInvesterConsultant} />
                                 <PrivateRoute exact path="/managePropertiesRequests" component={ManagePropertiesRequests} />
+                                <PrivateRoute exact path="/manageBlog" component={ManageBlog} />
                             </Switch>
                             <Route exact path="*" component={NotFound} />
                         </Switch>

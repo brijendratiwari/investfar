@@ -8,6 +8,9 @@ const users = require('./routes/api/users');
 require('./config/passport')(passport);
 
 const app = express();
+// Increase the request size limit to allow larger payloads
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");

@@ -612,4 +612,44 @@ router.get('/get_offered_service/:id', async (req, res) => {
   }
 });
 
+router.post('/add-blog', async (req, res) => {
+  console.log(req.body);
+  // const title = req.body.title;
+  // const description = req.body.description;
+  // const file = req.file;
+  try {
+    const data = req.body;
+    // console.log(data);
+    //const uploadTask = firebase.storage().ref(`images/${file.name}`).put(file);
+    const docRef = await firebase.firestore().collection('Blog').add(data);
+    res.status(200).json({ message: 'Data added successfully', id: docRef.id });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+  // Respond with a success message
+  res.json({ message: 'Data received successfully!'+file });
+});
+
+// router.post('/add-blog', async (req, res) => {
+//   var bucket = await firebase.getStorage();
+//   res.json({ message: 'Data received successfully!'+bucket });
+
+
+// });
+
+router.get('/get-blog', async (req, res) => {
+try{
+const propertiesSnapshot = await firebase.firestore().collection('Blog').get();
+const properties = propertiesSnapshot.docs.map((doc) => doc.data());
+
+res.json({
+  success: true,
+  listing: properties
+});
+} catch (error) {
+res.status(400).json({ message: error.message });
+}
+});
+
 module.exports = router;
