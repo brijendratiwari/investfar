@@ -1,20 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.902b30eb.chunk.css",
-    "main.js": "/static/js/main.49f85950.chunk.js",
-    "main.js.map": "/static/js/main.49f85950.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.81534a39.js",
-    "runtime-main.js.map": "/static/js/runtime-main.81534a39.js.map",
-    "static/css/2.a8b207a0.chunk.css": "/static/css/2.a8b207a0.chunk.css",
-    "static/js/2.ff7fa781.chunk.js": "/static/js/2.ff7fa781.chunk.js",
-    "static/js/2.ff7fa781.chunk.js.map": "/static/js/2.ff7fa781.chunk.js.map",
+    "main.css": "/static/css/main.7b487d9c.chunk.css",
+    "main.js": "/static/js/main.8fe1341a.chunk.js",
+    "main.js.map": "/static/js/main.8fe1341a.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
+    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
+    "static/css/2.76984872.chunk.css": "/static/css/2.76984872.chunk.css",
+    "static/js/2.8c1a80a5.chunk.js": "/static/js/2.8c1a80a5.chunk.js",
+    "static/js/2.8c1a80a5.chunk.js.map": "/static/js/2.8c1a80a5.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.607d7ad56e5df96275b3be27b07d4385.js": "/precache-manifest.607d7ad56e5df96275b3be27b07d4385.js",
+    "precache-manifest.fbf625a6de79d375e7f154b6cb58c582.js": "/precache-manifest.fbf625a6de79d375e7f154b6cb58c582.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/2.a8b207a0.chunk.css.map": "/static/css/2.a8b207a0.chunk.css.map",
-    "static/css/main.902b30eb.chunk.css.map": "/static/css/main.902b30eb.chunk.css.map",
-    "static/js/2.ff7fa781.chunk.js.LICENSE.txt": "/static/js/2.ff7fa781.chunk.js.LICENSE.txt",
-    "static/js/main.49f85950.chunk.js.LICENSE.txt": "/static/js/main.49f85950.chunk.js.LICENSE.txt",
+    "static/css/2.76984872.chunk.css.map": "/static/css/2.76984872.chunk.css.map",
+    "static/css/main.7b487d9c.chunk.css.map": "/static/css/main.7b487d9c.chunk.css.map",
     "static/media/Mike-Myers.jpg": "/static/media/Mike-Myers.8b8cb19e.jpg",
     "static/media/ac.png": "/static/media/ac.a6537905.png",
     "static/media/calculator.png": "/static/media/calculator.ff74d50c.png",
@@ -24,12 +22,5 @@
     "static/media/image9.png": "/static/media/image9.8d17c9af.png",
     "static/media/loginlogo.jpg": "/static/media/loginlogo.a60462f8.jpg",
     "static/media/walkscoure.png": "/static/media/walkscoure.6d19b74e.png"
-  },
-  "entrypoints": [
-    "static/js/runtime-main.81534a39.js",
-    "static/css/2.a8b207a0.chunk.css",
-    "static/js/2.ff7fa781.chunk.js",
-    "static/css/main.902b30eb.chunk.css",
-    "static/js/main.49f85950.chunk.js"
-  ]
+  }
 }
