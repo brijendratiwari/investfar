@@ -638,18 +638,51 @@ router.post('/add-blog', async (req, res) => {
 
 // });
 
+// router.get('/get-blog', async (req, res) => {
+// try{
+// const propertiesSnapshot = await firebase.firestore().collection('Blog').get();
+// const properties = propertiesSnapshot.docs.map((doc) => doc.data());
+
+// res.json({
+//   success: true,
+//   listing: properties
+// });
+// } catch (error) {
+// res.status(400).json({ message: error.message });
+// }
+// });
+
 router.get('/get-blog', async (req, res) => {
-try{
-const propertiesSnapshot = await firebase.firestore().collection('Blog').get();
-const properties = propertiesSnapshot.docs.map((doc) => doc.data());
+  try {
+    const propertiesSnapshot = await firebase.firestore().collection('Blog').get();
+    const properties = propertiesSnapshot.docs.map((doc) => ({
+      id: doc.id, // Include the ID in the response
+      data: doc.data(),
+    }));
 
-res.json({
-  success: true,
-  listing: properties
-});
-} catch (error) {
-res.status(400).json({ message: error.message });
-}
+    res.json({
+      success: true,
+      listing: properties,
+    });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 });
 
+
+// DELETE API to delete a blog post by ID
+router.delete('/delete-blog/:postId', async (req, res) => {
+  try {
+    const postId = req.params.postId; // Get the post ID from the request URL
+    console.log(postId);
+    // Delete the blog post with the specified ID
+    const blogRef = await firebase.firestore().collection('Blog').doc(postId);
+    await blogRef.delete();
+
+    res.status(200).json({ message: 'Blog post deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 module.exports = router;
