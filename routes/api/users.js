@@ -17,7 +17,8 @@ const CompletedRequestProperty = require('../../models/CompletedRequestProperty'
 const InvesterConsultant = require('../../models/InvesterConsultant');
 const Categories = require('../../models/Categories');
 const OfferedServies = require('../../models/OfferedServies');
-
+const multer = require('multer');
+const upload = multer({ storage: multer.memoryStorage() });
 const { framework } = require('passport');
 
 router.post('/user-add', (req, res) => {
@@ -612,74 +613,102 @@ router.get('/get_offered_service/:id', async (req, res) => {
   }
 });
 
-router.post('/add-blog', async (req, res) => {
-  console.log(req.body);
-  // const title = req.body.title;
-  // const description = req.body.description;
-  // const file = req.file;
+router.post('/add-blog', upload.single('file'), async (req, res) => {
+  const file = req.file;
   try {
     const data = req.body;
-    // console.log(data);
-    //const uploadTask = firebase.storage().ref(`images/${file.name}`).put(file);
-    const docRef = await firebase.firestore().collection('Blog').add(data);
-    res.status(200).json({ message: 'Data added successfully', id: docRef.id });
+
+    // Generate a unique timestamp for the file name
+    if(file){
+    const timestamp = Date.now();
+    const fileName = `${timestamp}_${file.originalname}`;
+
+    // Construct the file path in the Firebase Storage bucket
+    const bucket = firebase.storage().bucket(); // Get the default Firebase Storage bucket
+    const folderName = 'blog'; // Specify the folder path
+    const fullPath = `${folderName}/${fileName}`; // Include the folder path in the file name
+
+    const uploadTask = bucket.file(fullPath).createWriteStream();
+    uploadTask.end(file.buffer);
+
+    // Add the file path to the data object
+    data.filePath = fullPath;
+    }
+    if (data.id) {
+      const blogRef = firebase.firestore().collection('Blog').doc(data.id);
+      await blogRef.update(data);
+      res.status(200).json({ message: 'Blog updated successfully' });
+    } else {
+      const docRef = await firebase.firestore().collection('Blog').add(data);
+      res.status(200).json({ message: 'Data added successfully', id: docRef.id });
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal server error' });
   }
-  // Respond with a success message
-  res.json({ message: 'Data received successfully!'+file });
 });
 
-// router.post('/add-blog', async (req, res) => {
-//   var bucket = await firebase.getStorage();
-//   res.json({ message: 'Data received successfully!'+bucket });
-
-
-// });
-
-// router.get('/get-blog', async (req, res) => {
-// try{
-// const propertiesSnapshot = await firebase.firestore().collection('Blog').get();
-// const properties = propertiesSnapshot.docs.map((doc) => doc.data());
-
-// res.json({
-//   success: true,
-//   listing: properties
-// });
-// } catch (error) {
-// res.status(400).json({ message: error.message });
-// }
-// });
 
 router.get('/get-blog', async (req, res) => {
   try {
     const propertiesSnapshot = await firebase.firestore().collection('Blog').get();
-    const properties = propertiesSnapshot.docs.map((doc) => ({
-      id: doc.id, // Include the ID in the response
-      data: doc.data(),
-    }));
+    const properties = propertiesSnapshot.docs.map(async (doc) => {
+      const data = doc.data();
+
+      // Retrieve the full image path from Firebase Storage
+      const bucket = firebase.storage().bucket(); // Initialize the Firebase Admin SDK
+      const filePath = data.filePath; // Assuming 'filePath' is the field where the image path is stored
+
+      const file = bucket.file(filePath);
+      const [signedUrl] = await file.getSignedUrl({
+        action: 'read',
+        expires: '03-01-2500',
+      });
+
+      // Include the full image path in the response
+      data.fullImagePath = signedUrl;
+
+      return {
+        id: doc.id,
+        data: data,
+      };
+    });
+
+    const results = await Promise.all(properties);
 
     res.json({
       success: true,
-      listing: properties,
+      listing: results,
     });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 });
 
-
-// DELETE API to delete a blog post by ID
 router.delete('/delete-blog/:postId', async (req, res) => {
   try {
     const postId = req.params.postId; // Get the post ID from the request URL
-    console.log(postId);
-    // Delete the blog post with the specified ID
-    const blogRef = await firebase.firestore().collection('Blog').doc(postId);
-    await blogRef.delete();
 
-    res.status(200).json({ message: 'Blog post deleted successfully' });
+    // Fetch the blog post document from Firestore to get the image path
+    const blogRef = firebase.firestore().collection('Blog').doc(postId);
+    const doc = await blogRef.get();
+    const data = doc.data();
+
+    if (data) {
+      const imagePath = data.filePath; // Assuming 'filePath' is the field where the image path is stored
+
+      // Delete the image from Firebase Storage
+      const bucket = firebase.storage().bucket();
+      const file = bucket.file(imagePath);
+      await file.delete();
+
+      // Delete the blog post document from Firestore
+      await blogRef.delete();
+
+      res.status(200).json({ message: 'Blog post and associated image deleted successfully' });
+    } else {
+      res.status(404).json({ message: 'Blog post not found' });
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal server error' });

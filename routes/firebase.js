@@ -1,4 +1,6 @@
-const firebase = require('firebase');
+const firebase = require('firebase-admin');
+require("firebase/storage");
+const serviceAccount = require('../config/investfar-b494a-firebase-adminsdk-4puhb-6f98327175.json'); // Replace with the correct path to your service account key JSON file
 
 const firebaseConfig = {
   apiKey: "AIzaSyA2pq-jg4LFy8R_EgRCDmhD1qLZyZq7Xhw",
@@ -8,7 +10,8 @@ const firebaseConfig = {
   storageBucket: "investfar-b494a.appspot.com",
   messagingSenderId: "328462702651",
   appId: "1:328462702651:web:25e89ddd8c0260a385641e",
-  measurementId: "G-MRT32PP2SW"
+  measurementId: "G-MRT32PP2SW",
+  credential:firebase.credential.cert(serviceAccount)
 };
 
 firebase.initializeApp(firebaseConfig);
