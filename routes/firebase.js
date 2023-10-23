@@ -1,4 +1,4 @@
-const firebase = require('firebase-admin');
+const firebase = require('firebase');
 // require("firebase/storage");
 // const serviceAccount = require('../config/investfar-b494a-firebase-adminsdk-4puhb-6f98327175.json'); // Replace with the correct path to your service account key JSON file
 
