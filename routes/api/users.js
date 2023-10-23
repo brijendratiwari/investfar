@@ -20,6 +20,20 @@ const OfferedServies = require('../../models/OfferedServies');
 const multer = require('multer');
 const upload = multer({ storage: multer.memoryStorage() });
 const { framework } = require('passport');
+const firebase_file = require('firebase-admin');
+const serviceAccount = require('../../config/investfar-b494a-firebase-adminsdk-4puhb-6f98327175.json'); // Replace with the correct path to your service account key JSON file
+const firebaseConfig = {
+  apiKey: "AIzaSyA2pq-jg4LFy8R_EgRCDmhD1qLZyZq7Xhw",
+  authDomain: "investfar-b494a.firebaseapp.com",
+  databaseURL: "https://investfar-b494a.firebaseio.com",
+  projectId: "investfar-b494a",
+  storageBucket: "investfar-b494a.appspot.com",
+  messagingSenderId: "328462702651",
+  appId: "1:328462702651:web:25e89ddd8c0260a385641e",
+  measurementId: "G-MRT32PP2SW",
+  credential:firebase_file.credential.cert(serviceAccount)
+};
+firebase_file.initializeApp(firebaseConfig);
 
 router.post('/user-add', (req, res) => {
     const { errors, isValid } = validateRegisterInput(req.body);
@@ -624,7 +638,7 @@ router.post('/add-blog', upload.single('file'), async (req, res) => {
     const fileName = `${timestamp}_${file.originalname}`;
 
     // Construct the file path in the Firebase Storage bucket
-    const bucket = firebase.storage().bucket(); // Get the default Firebase Storage bucket
+    const bucket = firebase_file.storage().bucket(); // Get the default Firebase Storage bucket
     const folderName = 'blog'; // Specify the folder path
     const fullPath = `${folderName}/${fileName}`; // Include the folder path in the file name
 
@@ -656,7 +670,7 @@ router.get('/get-blog', async (req, res) => {
       const data = doc.data();
 
       // Retrieve the full image path from Firebase Storage
-      const bucket = firebase.storage().bucket(); // Initialize the Firebase Admin SDK
+      const bucket = firebase_file.storage().bucket(); // Initialize the Firebase Admin SDK
       const filePath = data.filePath; // Assuming 'filePath' is the field where the image path is stored
 
       const file = bucket.file(filePath);
@@ -698,7 +712,7 @@ router.delete('/delete-blog/:postId', async (req, res) => {
       const imagePath = data.filePath; // Assuming 'filePath' is the field where the image path is stored
 
       // Delete the image from Firebase Storage
-      const bucket = firebase.storage().bucket();
+      const bucket = firebase_file.storage().bucket();
       const file = bucket.file(imagePath);
       await file.delete();
 
