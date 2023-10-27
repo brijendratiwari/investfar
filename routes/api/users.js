@@ -728,4 +728,40 @@ router.delete('/delete-blog/:postId', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+router.get('/get-blog-app', async (req, res) => {
+  try {
+    const propertiesSnapshot = await firebase.firestore().collection('Blog').get();
+    const properties = propertiesSnapshot.docs.map(async (doc) => {
+      const data = doc.data();
+
+      // Retrieve the full image path from Firebase Storage
+      const bucket = firebase_file.storage().bucket(); // Initialize the Firebase Admin SDK
+      const filePath = data.filePath; // Assuming 'filePath' is the field where the image path is stored
+
+      const file = bucket.file(filePath);
+      const [signedUrl] = await file.getSignedUrl({
+        action: 'read',
+        expires: '03-01-2500',
+      });
+
+      // Include the full image path in the response
+      data.fullImagePath = signedUrl;
+
+      return {
+        id: doc.id,
+        data: data,
+      };
+    });
+
+    const results = await Promise.all(properties);
+
+    res.json({
+      success: true,
+      listing: results,
+    });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
 module.exports = router;
